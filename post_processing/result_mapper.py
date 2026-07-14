@@ -1,9 +1,12 @@
-from typing import Dict
+from utils.logging import get_logger
 
-def map_result(data: Dict[str, any]) -> Dict[str, any]:
+logger = get_logger(__name__)
+
+
+def map_result(normalized: dict, intent: str) -> dict:
+    logger.info("Mapping result to final structure")
     return {
-        "intent": data.get("intent"),
-        "hunter_hits": data.get("hunter_hits", []),
-        "score": data.get("score"),
-        "confidence": data.get("confidence"),
+        "intent": intent,
+        "prediction": normalized.get("prediction"),
+        "confidence": normalized.get("confidence"),
     }

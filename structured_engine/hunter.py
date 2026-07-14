@@ -1,9 +1,13 @@
-from typing import Any, Dict
+from utils.logging import get_logger
+
+logger = get_logger(__name__)
+
 
 class Hunter:
-    def __init__(self, targets: list[str]):
-        self.targets = targets
+    def __init__(self, name: str = "default_hunter"):
+        self.name = name
 
-    def hunt(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        data["hunter_hits"] = [t for t in self.targets if t in str(data)]
+    def hunt(self, data: dict) -> dict:
+        logger.info("Hunter routing data")
+        data["route"] = "default"
         return data

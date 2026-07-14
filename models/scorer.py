@@ -1,7 +1,16 @@
-from typing import Dict
+from utils.logging import get_logger
 
-def score_result(data: Dict[str, any]) -> float:
-    hits = len(data.get("hunter_hits", []))
-    intent = data.get("intent", "unknown")
-    base = 1.0 if intent != "unknown" else 0.5
-    return base + hits
+logger = get_logger(__name__)
+
+
+def score_prediction(prediction: dict) -> dict:
+    logger.info("Scoring prediction")
+    label = prediction.get("label", "unknown")
+    confidence = 0.5
+    if label == "empty":
+        confidence = 0.9
+    elif label == "short":
+        confidence = 0.7
+    elif label == "long":
+        confidence = 0.8
+    return {"label": label, "confidence": confidence}

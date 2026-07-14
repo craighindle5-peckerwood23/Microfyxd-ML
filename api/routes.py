@@ -1,8 +1,5 @@
-from typing import Dict
+from api.ingest import ingest_text
 
-def health() -> Dict[str, str]:
-    return {"status": "ok", "service": "microfyxd-ml"}
 
-def predict_route(body: Dict[str, any]) -> Dict[str, any]:
-    from .predict import predict
-    return predict(body)
+def predict_from_text(text: str) -> dict:
+    return ingest_text(text)

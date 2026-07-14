@@ -1,8 +1,10 @@
-from typing import Dict
+from utils.logging import get_logger
 
-def build_stats_features(data: Dict[str, str]) -> Dict[str, float]:
-    text = data.get("text", "")
-    return {
-        "uppercase_ratio": float(sum(c.isupper() for c in text)) / max(len(text), 1),
-        "digit_ratio": float(sum(c.isdigit() for c in text)) / max(len(text), 1),
-    }
+logger = get_logger(__name__)
+
+
+def stats_features(tokens: list) -> dict:
+    logger.info("Computing simple stats features")
+    length = len(tokens)
+    avg_len = sum(len(t) for t in tokens) / length if length > 0 else 0.0
+    return {"token_count": length, "avg_token_length": avg_len}

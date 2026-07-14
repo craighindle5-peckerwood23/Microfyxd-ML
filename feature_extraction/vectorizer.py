@@ -1,8 +1,9 @@
-from typing import Dict
+from collections import Counter
+from utils.logging import get_logger
 
-def vectorize(data: Dict[str, str]) -> Dict[str, float]:
-    text = data.get("text", "")
-    return {
-        "length": float(len(text)),
-        "spaces": float(text.count(" ")),
-    }
+logger = get_logger(__name__)
+
+
+def bow_vector(tokens: list) -> dict:
+    logger.info("Creating bag-of-words vector")
+    return dict(Counter(tokens))

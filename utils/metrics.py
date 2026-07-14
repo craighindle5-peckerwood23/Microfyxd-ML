@@ -1,11 +1,7 @@
-from typing import Dict
+from utils.logging import get_logger
 
-class Metrics:
-    def __init__(self):
-        self._counters: Dict[str, int] = {}
+logger = get_logger(__name__)
 
-    def inc(self, name: str, value: int = 1) -> None:
-        self._counters[name] = self._counters.get(name, 0) + value
 
-    def snapshot(self) -> Dict[str, int]:
-        return dict(self._counters)
+def log_metric(name: str, value: float) -> None:
+    logger.info(f"Metric {name}: {value}")

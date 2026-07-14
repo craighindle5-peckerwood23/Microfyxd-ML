@@ -1,7 +1,3 @@
-from typing import TypedDict, List
+from typing import Dict, Any
 
-class PredictionResult(TypedDict):
-    intent: str
-    hunter_hits: List[str]
-    score: float
-    confidence: float
+JsonDict = Dict[str, Any]

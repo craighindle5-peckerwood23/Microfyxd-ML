@@ -1,16 +1,12 @@
-from typing import Dict
-from orchestration.job_manager import JobManager
-from post_processing.confidence import compute_confidence
-from post_processing.result_mapper import map_result
-from post_processing.output_normalizer import normalize_output
-from models.scorer import score_result
+from api.ingest import ingest_text
+from utils.logging import get_logger
 
-_job_manager = JobManager()
+logger = get_logger(__name__)
 
-def predict(raw: Dict[str, any]) -> Dict[str, any]:
-    payload = raw.copy()
-    processed = _job_manager.run_job(payload)
-    processed["score"] = score_result(processed)
-    processed["confidence"] = compute_confidence(processed["score"])
-    result = map_result(processed)
-    return normalize_output(result)
+
+def run_prediction_demo() -> None:
+    sample_text = "Hello world, this is a Microfyxd-ML demo message."
+    logger.info("Running prediction demo")
+    result = ingest_text(sample_text)
+    print("Final result:")
+    print(result)

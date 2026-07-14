@@ -1,11 +1,12 @@
-from typing import Any, Dict
+from utils.logging import get_logger
+
+logger = get_logger(__name__)
+
 
 class StateTracker:
     def __init__(self):
-        self._states: Dict[str, Dict[str, Any]] = {}
+        self.states = []
 
-    def set_state(self, job_id: str, state: Dict[str, Any]) -> None:
-        self._states[job_id] = state
-
-    def get_state(self, job_id: str) -> Dict[str, Any]:
-        return self._states.get(job_id, {})
+    def log_state(self, stage: str, data: dict) -> None:
+        logger.info(f"StateTracker logging stage: {stage}")
+        self.states.append((stage, data))

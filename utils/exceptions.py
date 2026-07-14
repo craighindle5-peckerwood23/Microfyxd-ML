@@ -1,5 +1,2 @@
-class MLPipelineError(Exception):
-    pass
-
-class ModelNotFoundError(MLPipelineError):
-    pass
+class MicrofyxdError(Exception):
+    """Base exception for Microfyxd-ML."""

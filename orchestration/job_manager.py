@@ -1,9 +1,15 @@
-from typing import Any, Dict
-from .pipeline import MLPipeline
+from utils.logging import get_logger
+
+logger = get_logger(__name__)
+
 
 class JobManager:
     def __init__(self):
-        self.pipeline = MLPipeline()
+        self.jobs = []
 
-    def run_job(self, payload: Dict[str, Any]) -> Dict[str, Any]:
-        return self.pipeline.run(payload)
+    def submit(self, job_data: dict) -> None:
+        logger.info("JobManager submitting job")
+        self.jobs.append(job_data)
+
+    def list_jobs(self) -> list:
+        return self.jobs

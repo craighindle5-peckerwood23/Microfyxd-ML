@@ -1,6 +1,8 @@
-from typing import List
+from utils.logging import get_logger
 
-def compute_embeddings(text: str) -> List[float]:
-    length = len(text)
-    vowels = sum(1 for c in text.lower() if c in "aeiou")
-    return [float(length), float(vowels)]
+logger = get_logger(__name__)
+
+
+def dummy_embeddings(tokens: list) -> dict:
+    logger.info("Creating dummy embeddings")
+    return {token: float(len(token)) for token in tokens}

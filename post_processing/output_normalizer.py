@@ -1,9 +1,11 @@
-from typing import Dict
+from utils.logging import get_logger
 
-def normalize_output(result: Dict[str, any]) -> Dict[str, any]:
+logger = get_logger(__name__)
+
+
+def normalize_output(prediction: dict) -> dict:
+    logger.info("Normalizing output")
     return {
-        "intent": result.get("intent", "unknown"),
-        "hunter_hits": result.get("hunter_hits", []),
-        "score": float(result.get("score", 0.0)),
-        "confidence": float(result.get("confidence", 0.0)),
+        "prediction": prediction.get("label"),
+        "confidence": prediction.get("confidence"),
     }

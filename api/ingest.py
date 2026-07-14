@@ -1,7 +1,11 @@
-from typing import Dict
+from orchestration.pipeline import Pipeline
+from utils.logging import get_logger
 
-def ingest_payload(raw: Dict[str, any]) -> Dict[str, any]:
-    return {
-        "text": raw.get("text", ""),
-        "meta": raw.get("meta", {}),
-    }
+logger = get_logger(__name__)
+
+
+def ingest_text(text: str) -> dict:
+    logger.info("API ingest_text called")
+    pipeline = Pipeline()
+    result = pipeline.run({"text": text})
+    return result

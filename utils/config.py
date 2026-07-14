@@ -1,4 +1,4 @@
-import os
-
-def get_env(key: str, default: str = "") -> str:
-    return os.getenv(key, default)
+CONFIG = {
+    "app_name": "Microfyxd-ML",
+    "version": "0.1.0",
+}

@@ -1,15 +1,11 @@
-from typing import Any, Dict
+from utils.logging import get_logger
+
+logger = get_logger(__name__)
+
 
 class IntentClassifier:
-    def __init__(self, labels: list[str]):
-        self.labels = labels
-
-    def classify(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        text = str(data.get("text", "")).lower()
-        intent = "unknown"
-        for label in self.labels:
-            if label in text:
-                intent = label
-                break
-        data["intent"] = intent
-        return data
+    def classify_intent(self, text: str) -> str:
+        logger.info("Classifying intent (dummy)")
+        if "hello" in text.lower():
+            return "greeting"
+        return "generic"

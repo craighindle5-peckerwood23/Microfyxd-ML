@@ -1,10 +1,14 @@
 import logging
 
-logger = logging.getLogger("microfyxd_ml")
-logging.basicConfig(level=logging.INFO)
 
-def log_info(msg: str) -> None:
-    logger.info(msg)
-
-def log_error(msg: str) -> None:
-    logger.error(msg)
+def get_logger(name: str) -> logging.Logger:
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(
+            "[%(asctime)s] %(name)s %(levelname)s: %(message)s"
+        )
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+    return logger

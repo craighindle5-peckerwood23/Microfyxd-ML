@@ -1,7 +1,12 @@
-import pytesseract
-from PIL import Image
+from utils.logging import get_logger
 
-class OCRIngest:
-    def extract(self, image_path):
-        text = pytesseract.image_to_string(Image.open(image_path))
-        return {"source": "ocr", "content": text}
+logger = get_logger(__name__)
+
+
+class OCRIngestor:
+    def __init__(self, name: str = "ocr"):
+        self.name = name
+
+    def ingest(self, image_bytes: bytes) -> dict:
+        logger.info("Ingesting OCR image bytes")
+        return {"image": image_bytes, "source": self.name}
